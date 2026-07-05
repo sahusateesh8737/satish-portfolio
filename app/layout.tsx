@@ -21,8 +21,8 @@ const anton = Anton({
 });
 
 export const metadata: Metadata = {
-  title: "Minimalist Portfolio",
-  description: "A minimalist black and white portfolio",
+  title: "Satish Sahu",
+  description: "Satish Sahu - Full-Stack Developer Portfolio",
 };
 
 export default function RootLayout({
