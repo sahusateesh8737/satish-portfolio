@@ -42,12 +42,18 @@ export default function SmoothScrolling({
     };
     // Native anchors retain their URL, history, and keyboard-focus behavior.
     configure();
+    // Disclosure transitions change page height every frame. Lenis's default
+    // debounced observer can otherwise clamp wheel gestures to an older height.
+    const projects = document.getElementById("projects");
+    const projectResizeObserver = new ResizeObserver(() => lenis?.resize());
+    if (projects) projectResizeObserver.observe(projects);
     preference.addEventListener("change", configure);
     // Native details toggle events do not bubble.
     document.addEventListener("toggle", handleToggle, true);
     return () => {
       preference.removeEventListener("change", configure);
       document.removeEventListener("toggle", handleToggle, true);
+      projectResizeObserver.disconnect();
       cancelAnimationFrame(frame);
       cancelAnimationFrame(resizeFrame);
       lenis?.destroy();

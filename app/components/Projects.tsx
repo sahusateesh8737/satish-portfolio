@@ -30,56 +30,58 @@ export default function Projects() {
                   />
                 </span>
               </summary>
-              <div className="project-content">
-                <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 border-l-2 border-foreground pl-5">
-                  <div>
-                    <h4 className="text-xl font-bold mb-3">
-                      {project.headline}
-                    </h4>
-                    <p className="text-lg leading-relaxed">
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="text-base leading-relaxed">
-                    <h4 className="font-bold uppercase tracking-wider mb-3">
-                      Tech Stack
-                    </h4>
-                    <p>{project.tech.join(", ")}</p>
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 mt-5 font-bold uppercase underline underline-offset-4"
-                    >
-                      View Project <ArrowUpRight size={18} />
-                    </a>
-                  </div>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-6 mt-8 border-y border-foreground py-6">
-                  {project.metrics.map((metric) => (
-                    <div key={metric.label}>
-                      <strong className="font-display text-3xl uppercase">
-                        {metric.value}
-                      </strong>
-                      <p className="text-base mt-1">{metric.label}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid md:grid-cols-2 gap-8 mt-8">
-                  {project.architecture.map((item) => (
-                    <div key={item.label}>
-                      <h4 className="text-base font-bold uppercase tracking-wider mb-2">
-                        {item.label}
+              <div className="project-reveal">
+                <div className="project-content">
+                  <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 border-l-2 border-foreground pl-5">
+                    <div>
+                      <h4 className="text-xl font-bold mb-3">
+                        {project.headline}
                       </h4>
-                      <p className="text-lg leading-relaxed">{item.text}</p>
+                      <p className="text-lg leading-relaxed">
+                        {project.description}
+                      </p>
                     </div>
-                  ))}
+                    <div className="text-base leading-relaxed">
+                      <h4 className="font-bold uppercase tracking-wider mb-3">
+                        Tech Stack
+                      </h4>
+                      <p>{project.tech.join(", ")}</p>
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 mt-5 font-bold uppercase underline underline-offset-4"
+                      >
+                        View Project <ArrowUpRight size={18} />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-6 mt-8 border-y border-foreground py-6">
+                    {project.metrics.map((metric) => (
+                      <div key={metric.label}>
+                        <strong className="font-display text-3xl uppercase">
+                          {metric.value}
+                        </strong>
+                        <p className="text-base mt-1">{metric.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8 mt-8">
+                    {project.architecture.map((item) => (
+                      <div key={item.label}>
+                        <h4 className="text-base font-bold uppercase tracking-wider mb-2">
+                          {item.label}
+                        </h4>
+                        <p className="text-lg leading-relaxed">{item.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {project.footnote && (
+                    <p className="text-base leading-relaxed mt-8 opacity-70">
+                      {project.footnote}
+                    </p>
+                  )}
                 </div>
-                {project.footnote && (
-                  <p className="text-base leading-relaxed mt-8 opacity-70">
-                    {project.footnote}
-                  </p>
-                )}
               </div>
             </details>
           ))}
