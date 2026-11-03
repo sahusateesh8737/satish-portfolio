@@ -16,7 +16,9 @@ npm run build
 npm start
 ```
 
-Development output uses `.next/`; production uses `.next-production/` so an active development server cannot clear the production preview.
+Production builds use the standard `.next/` directory expected by Vercel. Next.js 16 isolates development output in `.next/dev/` automatically.
+
+On Vercel, use the Next.js framework preset and keep the Build Command and Output Directory overrides disabled so the framework defaults are used.
 
 ## Update content
 
