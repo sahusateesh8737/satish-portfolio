@@ -1,86 +1,87 @@
-"use client";
-
-import { useState } from "react";
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
-
-const PROJECTS = [
-  { 
-    id: 1, 
-    title: "snapPDF", 
-    category: "PDF Utility", 
-    year: "2026", 
-    link: "https://www.snappdf.shop/",
-    description: "Developed a scalable document conversion service utilizing a pnpm workspace monorepo architecture. Containerized the backend using Docker with LibreOffice headless and extensive font libraries to ensure high-fidelity Word-to-PDF document conversions.",
-    tech: "Next.js, TypeScript, Node.js, Docker, LibreOffice"
-  },
-  { 
-    id: 2, 
-    title: "FairPlay", 
-    category: "Assessment Platform", 
-    year: "2026", 
-    link: "https://fair-play-davq.vercel.app/",
-    description: "Engineered a scalable academic assessment platform featuring a custom multi-file Sandbox IDE (Monaco Editor) for secure in-browser code execution. Developed a low-latency monitoring system using Socket.io to instantly detect anomalies during live proctoring.",
-    tech: "React, Node.js, Socket.io, PostgreSQL, Redis, Docker, AWS"
-  },
-];
+import { ArrowUpRight } from "lucide-react";
+import { projects } from "../data/projects";
 
 export default function Projects() {
-  const [expandedId, setExpandedId] = useState<number | null>(null);
-
-  const toggleProject = (id: number) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
-
   return (
     <section id="projects" className="py-24 px-4 border-t-2 border-foreground">
       <div className="container mx-auto max-w-5xl">
         <h2 className="font-display text-6xl md:text-8xl uppercase mb-12">
           Projects
         </h2>
-        <div className="flex flex-col border-t-2 border-foreground">
-          {PROJECTS.map((project) => (
-            <div
+        <div className="border-t-2 border-foreground">
+          {projects.map((project) => (
+            <details
               key={project.id}
-              className="group flex flex-col py-8 border-b-2 border-foreground hover:bg-foreground hover:text-background transition-colors px-4 cursor-pointer"
-              onClick={() => toggleProject(project.id)}
+              id={project.id}
+              name="projects"
+              className="project-row border-b-2 border-foreground"
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
-                <h3 className="font-display text-4xl md:text-6xl uppercase group-hover:pl-4 transition-all duration-300">
+              <summary className="project-summary">
+                <h3 className="font-display text-4xl md:text-6xl uppercase">
                   {project.title}
                 </h3>
-                <div className="flex items-center gap-8 mt-4 md:mt-0 font-bold uppercase tracking-widest text-sm">
+                <span className="project-meta">
                   <span>{project.category}</span>
-                  <span>{project.year}</span>
-                  {expandedId === project.id ? (
-                    <ArrowDownRight className="h-8 w-8 opacity-100" />
-                  ) : (
-                    <ArrowUpRight className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  )}
-                </div>
-              </div>
-              
-              <div 
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  expandedId === project.id ? "max-h-96 opacity-100 mt-8" : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="flex flex-col md:flex-row gap-8 pl-4 border-l-2 border-current ml-4">
-                  <p className="flex-1 text-lg font-medium leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="w-full md:w-1/3 flex flex-col gap-4 text-sm font-bold uppercase tracking-widest">
-                    <div>
-                      <span className="block opacity-60 mb-1">Tech Stack</span>
-                      <span>{project.tech}</span>
-                    </div>
-                    <div>
-                      <span className="block opacity-60 mb-1">Link</span>
-                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4">View Project</a>
-                    </div>
+                  {project.date && <span>{project.date}</span>}
+                  <ArrowUpRight
+                    className="project-arrow"
+                    size={28}
+                    aria-hidden="true"
+                  />
+                </span>
+              </summary>
+              <div className="project-content">
+                <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 border-l-2 border-foreground pl-5">
+                  <div>
+                    <h4 className="text-xl font-bold mb-3">
+                      {project.headline}
+                    </h4>
+                    <p className="text-lg leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+                  <div className="text-base leading-relaxed">
+                    <h4 className="font-bold uppercase tracking-wider mb-3">
+                      Tech Stack
+                    </h4>
+                    <p>{project.tech.join(", ")}</p>
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 mt-5 font-bold uppercase underline underline-offset-4"
+                    >
+                      View Project <ArrowUpRight size={18} />
+                    </a>
                   </div>
                 </div>
+                <div className="grid sm:grid-cols-2 gap-6 mt-8 border-y border-foreground py-6">
+                  {project.metrics.map((metric) => (
+                    <div key={metric.label}>
+                      <strong className="font-display text-3xl uppercase">
+                        {metric.value}
+                      </strong>
+                      <p className="text-base mt-1">{metric.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="grid md:grid-cols-2 gap-8 mt-8">
+                  {project.architecture.map((item) => (
+                    <div key={item.label}>
+                      <h4 className="text-base font-bold uppercase tracking-wider mb-2">
+                        {item.label}
+                      </h4>
+                      <p className="text-lg leading-relaxed">{item.text}</p>
+                    </div>
+                  ))}
+                </div>
+                {project.footnote && (
+                  <p className="text-base leading-relaxed mt-8 opacity-70">
+                    {project.footnote}
+                  </p>
+                )}
               </div>
-            </div>
+            </details>
           ))}
         </div>
       </div>

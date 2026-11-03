@@ -4,22 +4,25 @@ const EDUCATION = [
     school: "Lovely Professional University",
     location: "Phagwara, Punjab",
     degree: "B.Tech in Computer Science and Engineering",
-    period: "Aug 2023 - Present"
+    period: "Aug 2023 - Present",
+    score: "CGPA: 7.45",
   },
   {
     id: 2,
-    school: "Shiva ji Inter College",
+    school: "Shiva Ji Inter College",
     location: "Keshav Nagar, Kanpur",
     degree: "Intermediate (12th Grade)",
-    period: "Apr 2020 - Jul 2021"
+    period: "Apr 2020 - Jul 2021",
+    score: "77%",
   },
   {
     id: 3,
     school: "Rahul Memorial Inter College",
     location: "Yashoda Nagar, Kanpur",
     degree: "Matriculation (10th Grade)",
-    period: "Apr 2018 - Mar 2019"
-  }
+    period: "Apr 2018 - Mar 2019",
+    score: "73%",
+  },
 ];
 
 export default function Education() {
@@ -35,7 +38,7 @@ export default function Education() {
               key={edu.id}
               className="group flex flex-col py-8 border-b-2 border-foreground hover:bg-foreground hover:text-background transition-colors px-4"
             >
-              <div className="flex flex-col md:flex-row justify-between w-full">
+              <div className="flex flex-col md:flex-row justify-between gap-6 w-full">
                 <div className="flex flex-col">
                   <h3 className="font-display text-3xl md:text-5xl uppercase group-hover:pl-4 transition-all duration-300">
                     {edu.school}
@@ -44,8 +47,9 @@ export default function Education() {
                     {edu.degree}
                   </p>
                 </div>
-                <div className="flex flex-col md:items-end mt-4 md:mt-0 font-bold uppercase tracking-widest text-sm opacity-80 gap-1">
+                <div className="flex flex-col md:items-end mt-4 md:mt-0 font-bold uppercase tracking-widest text-base opacity-80 gap-1">
                   <span>{edu.period}</span>
+                  <span>{edu.score}</span>
                   <span className="opacity-60">{edu.location}</span>
                 </div>
               </div>

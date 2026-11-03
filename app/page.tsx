@@ -6,18 +6,19 @@ import Education from "./components/Education";
 import Certifications from "./components/Certifications";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
-
 export default function Home() {
   return (
-    <main className="flex-grow flex flex-col">
+    <>
       <Navbar />
-      <Hero />
-      <About />
-      <TechStack />
-      <Education />
-      <Projects />
-      <Certifications />
-      <Contact />
-    </main>
+      <main id="main-content" tabIndex={-1}>
+        <Hero />
+        <About />
+        <TechStack />
+        <Education />
+        <Projects />
+        <Certifications />
+        <Contact />
+      </main>
+    </>
   );
 }

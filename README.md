@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Satish Sahu — Portfolio
 
-## Getting Started
+A minimalist black-and-white portfolio built with Next.js 16, React 19, TypeScript, and Tailwind CSS 4. It uses Anton display headings, Geist body text, light/dark themes, and subtle entrance animation.
 
-First, run the development server:
+## Run locally
 
-```bash
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. For a production preview:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Development output uses `.next/`; production uses `.next-production/` so an active development server cannot clear the production preview.
 
-## Learn More
+## Update content
 
-To learn more about Next.js, take a look at the following resources:
+- `app/page.tsx` sets the section order: Hero, About, Tech Stack, Education, Projects, Certifications, Contact.
+- `app/data/projects.ts` contains all three projects, live links, technology stacks, architecture details, and qualified resume-reported results.
+- `app/components/Projects.tsx` displays projects as native, keyboard-accessible expandable rows.
+- The About, TechStack, Education, and Certifications components hold the remaining profile content.
+- `public/Satish_Sahu_resume.pdf` is the downloadable resume. Replace it when updating qualifications and update the displayed content too.
+- `app/globals.css` defines the monochrome theme, responsive navigation, project rows, and reduced-motion styles.
+- `app/layout.tsx`, `app/icon.svg`, `app/favicon.ico`, and `app/opengraph-image.tsx` define metadata and site identity.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The theme preference persists through `next-themes`. Smooth scrolling respects reduced-motion settings. Email copy needs HTTPS or localhost and shows a fallback if clipboard access is denied. Project details work without JavaScript.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For deployment outside Vercel, set `NEXT_PUBLIC_SITE_URL` to the public origin before building so social preview URLs use the correct domain. On Vercel, the production domain is detected automatically.

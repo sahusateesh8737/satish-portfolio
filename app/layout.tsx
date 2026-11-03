@@ -16,13 +16,29 @@ const geistMono = Geist_Mono({
 
 const anton = Anton({
   weight: "400",
-  variable: "--font-display",
+  variable: "--font-anton",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Satish Sahu",
-  description: "Satish Sahu - Full-Stack Developer Portfolio",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        : "http://localhost:3000"),
+  ),
+  title: "Satish Sahu — Full-Stack Developer",
+  description:
+    "Satish Sahu — Full-stack developer building web applications, real-time systems, and placement tools with React, Next.js, Node.js, and Django.",
+  authors: [{ name: "Satish Sahu" }],
+  openGraph: {
+    title: "Satish Sahu — Full-Stack Developer",
+    description:
+      "Full-stack developer building web products with React, Next.js, Node.js, Django, and a curiosity for how things work.",
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
@@ -36,16 +52,17 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col transition-colors duration-300">
+      <body>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >
-          <SmoothScrolling>
-            {children}
-          </SmoothScrolling>
+          <SmoothScrolling>{children}</SmoothScrolling>
         </ThemeProvider>
       </body>
     </html>
